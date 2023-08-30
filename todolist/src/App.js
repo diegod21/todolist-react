@@ -1,35 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react'
 
+import List from './list';
+import Form from './form'
+
 function App() {
   
-  const [text , setText] = useState('') 
   const [items, setItems] = useState([])
-    function changeHandle(event){
-    let t = event.target.value
-    setText(t)
+  function onAddItem(item){
+    setItems([...items, item])
   }
-  function addItem(event){
-    event.preventDefault()
-    if (text) {
-      setItems([...items, text])
-      setText("")
-    }
-
-  }
+   
   return (
     <div className="">
       <h1>Todo</h1>
 
-      <form>
-        <input onChange={changeHandle} type="text" value={text}></input>
-        <button onClick={addItem}>Add</button>
-      </form>
+      <Form onAddItem={onAddItem}></Form>
 
-      <ul>
-      {items.map(item=> <li>{item}</li>)}
-      </ul>
+      <List items={items}></List>
     </div>
   );
 }
